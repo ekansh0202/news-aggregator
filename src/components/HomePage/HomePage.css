@@ -1,0 +1,188 @@
+.home-container {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  
+  /* Links Section */
+.home-options {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 20px;
+  font-size: 1rem;
+  background-color: white;
+  border-radius: 60px;
+}
+
+/* Buttons */
+.home-button {
+  background-color: transparent;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.home-button:hover {
+  background-color: #e0e7ff; 
+}
+
+/* Primary Button */
+.home-button.primary {
+  background-color: #1e40af; 
+  color: white;
+}
+
+.home-button.primary:hover {
+  background-color: #1d4ed8;
+}
+
+/* Separator */
+.separator {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.search{
+  height: 30px;
+  border: 1px solid grey;
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 10px;
+  width: 200px;
+}
+
+.text-container {
+  margin-top: 50px;
+  max-width: 100%;
+}
+
+.text {
+  color: #2d3748; 
+  font-size: 3rem; 
+  font-weight: bold;
+  width: 800px;
+  margin-bottom: 20px;
+}
+
+.subtitle{
+  font-size: 1rem;
+}
+  
+/* Mobile Responsive Styles */
+
+@media (max-width: 1000px) {
+  .home-container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .text {
+    font-size: 1.25rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .home-options {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px;
+    border-radius: 30px;
+  }
+
+  .home-button {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+
+  .home-search {
+    width: 100%;
+    text-align: center;
+  }
+
+  .search {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .text {
+    font-size: 1.25rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .home-options {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px;
+    border-radius: 30px;
+  }
+
+  .home-button {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+
+  .home-search {
+    width: 100%;
+    text-align: center;
+  }
+
+  .search {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .text {
+    font-size: 1rem;
+  }
+
+  .subtitle {
+    font-size: 0.8rem;
+  }
+
+  .home-options {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .home-button {
+    width: 100%;
+    max-width: 200px;
+    text-align: center;
+  }
+
+  .search {
+    width: 90%;
+  }
+}

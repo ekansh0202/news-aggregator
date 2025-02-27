@@ -1,0 +1,80 @@
+.sidebar {
+    padding: 1rem; /* px-4 */
+    position: sticky;
+    top: 2rem; /* top-8 */
+    max-height: fit-content; /* h-max */
+  }
+  
+  .section-title {
+    margin-bottom: 1rem; /* mb-4 */
+    margin-top: 2rem; /* mt-8 */
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500; /* font-medium */
+  }
+  
+  .filter-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* gap-2 */
+    font-size: 0.875rem; /* text-sm */
+  }
+
+  .filter-options-date {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* gap-2 */
+    font-size: 0.875rem; /* text-sm */
+    margin-top: 30px;
+  }
+  
+  .filter-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .filter-input {
+    appearance: none;
+    width: 1rem; /* w-4 */
+    height: 1rem; /* h-4 */
+    border: 1.5px solid #1e40af; /* border-blue-800 */
+    cursor: pointer;
+    border-radius: 0.25rem; /* rounded-sm */
+    background-color: white;
+  }
+  
+  .filter-input:checked {
+    background-color: #1e40af; /* checked:bg-blue-800 */
+  }
+  
+  .search{
+    height: 30px;
+    border: 1px solid grey;
+    border-radius: 20px;
+    box-sizing: border-box;
+    padding: 10px;
+    width: 200px;
+  }
+
+  .date-filter {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem; /* text-sm */
+    cursor: pointer;
+  }
+  
+  .date-input {
+    padding: 0.3rem 0.5rem;
+    border: 1.5px solid #1e40af; /* border-blue-800 */
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    cursor: pointer;
+    background-color: white;
+    outline: none;
+  }
+  
+  .date-input:focus {
+    border-color: #2563eb; /* Slightly brighter blue */
+  }

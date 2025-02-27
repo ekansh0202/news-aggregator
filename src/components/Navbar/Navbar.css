@@ -1,0 +1,127 @@
+.title{
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+/* Navbar container */
+.navbar {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  /* Desktop Menu */
+  .desktop-menu {
+    display: none;
+  }
+  
+  .desktop-menu a {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    margin: 0 15px;
+  }
+  
+  .desktop-menu a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Mobile Menu */
+  .mobile-menu {
+    display: flex;
+    align-items: center;
+  }
+  
+  .menu-icon {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .bar {
+    width: 24px;
+    height: 3px;
+    background-color: black;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .rotate-45 {
+    transform: rotate(45deg);
+  }
+  
+  .-rotate-45 {
+    transform: rotate(-45deg);
+  }
+  
+  .hidden {
+    opacity: 0;
+  }
+  
+  /* Mobile Links */
+  .mobile-links {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+    background-color: #e6e6ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 30px 0;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .mobile-links a {
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    font-weight: 500;
+  }
+  
+  .mobile-links a:hover {
+    text-decoration: underline;
+  }
+  
+  .mobile-links .login-btn {
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .mobile-links .login-btn:hover {
+    background-color: darkblue;
+  }
+  
+  /* Hide Mobile Links by default */
+  .hide {
+    right: -100%;
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  .show {
+    right: 0;
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* Responsive Design */
+  @media screen and (min-width: 768px) {
+    .desktop-menu {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+  
+    .mobile-menu {
+      display: none;
+    }
+  }
+  
