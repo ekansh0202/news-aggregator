@@ -1,15 +1,23 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface NewsState {
-  allArticles: any[]; // original
-  articles: any[]; // filtered
+  allArticles: any[]; // all the articles combined - original
+  articles: any[]; // all the articles combined - filtered - used to display the data
+  allNewsArticles: any[]; // original
+  newsArticles: any[]; // filtered - filtered - used to display the data
+  allGuardianArticles: any[]; // original
+  guardianArticles: any[]; // filtered - filtered - used to display the data
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }
 
 const initialState: NewsState = {
-  allArticles:[],
-  articles:[],
+  allArticles: [],
+  articles: [],
+  allNewsArticles:[],
+  newsArticles:[],
+  allGuardianArticles:[],
+  guardianArticles:[],
   status: "idle",
   error: null,
 };
@@ -21,14 +29,20 @@ const newsSlice = createSlice({
     fetchNewsStart(state) {
       state.status = "loading";
     },
-    fetchNewsSuccess(state, action: PayloadAction<any[]>) {
+    fetchNewsuccess(state, action: PayloadAction<any[]>) {
       state.status = "succeeded";
-      state.allArticles = action.payload;
-      state.articles = action.payload;
+      const flattenedArticles = action.payload.flat(); 
+      state.allArticles = flattenedArticles
+      state.articles = flattenedArticles
     },
     fetchNewsFailure(state, action: PayloadAction<string>) {
       state.status = "failed";
       state.error = action.payload;
+    },
+    fetchNewForSource(state, action: PayloadAction<any[]>) {
+      state.status = "succeeded";
+      state.allArticles = action.payload
+      state.articles = action.payload
     },
     setArticles(state, action: PayloadAction<any[]>){
       state.articles = action.payload
@@ -36,5 +50,6 @@ const newsSlice = createSlice({
   },
 });
 
-export const { fetchNewsStart, fetchNewsSuccess, fetchNewsFailure, setArticles } = newsSlice.actions;
+// export const { fetchNewsStart, fetchNewsFromNewsAPISuccess, fetchNewsFromGuardianAPISuccess, fetchNewsFailure, setArticles } = newsSlice.actions;
+export const { fetchNewsStart, fetchNewsuccess, fetchNewsFailure, fetchNewForSource, setArticles } = newsSlice.actions;
 export default newsSlice.reducer;

@@ -1,10 +1,17 @@
+import { useState } from "react";
 import useFetchNews from "../../hooks/useFetchNews";
 import NewsPage from "../NewsPage/NewsPage";
 import "./HomePage.css";
 
 const HomePage = () => {
 
-  const { filterNewsItems } = useFetchNews();
+  const { filterNewsItems, getNewsItemsFromSource } = useFetchNews();
+  const [source, setSource] = useState("all");
+
+  const onHandleGetNewsFromSource = (sourceType: string) => {
+    setSource(sourceType);
+    getNewsItemsFromSource(sourceType);
+  }
   
   return (
     <div className="home-container">
@@ -18,12 +25,10 @@ const HomePage = () => {
         </div>
 
       <div className="home-options">
-        <button className="home-button primary">All News</button>
-        <button className="home-button">Web Design</button>
-        <button className="home-button">Development</button>
-        <button className="home-button">Databases</button>
-        <button className="home-button">Search Engines</button>
-        <button className="home-button">Marketing</button>
+        <button className={`home-button ${source === "all" ? "primary" : ""}`} >All News</button>
+        <button className={`home-button ${source === "newsApi" ? "primary" : ""}`} onClick={() => onHandleGetNewsFromSource('newsApi')}>News Api</button>
+        <button className={`home-button ${source === "guardian" ? "primary" : ""}`} onClick={() => onHandleGetNewsFromSource('guardian')}>Guardian</button>
+        <button className={`home-button ${source === "newsApiOrg" ? "primary" : ""}`} onClick={() => onHandleGetNewsFromSource('newsApiOrg')}>News.org</button>
         <span className="separator">|</span>
         <div className="home-search">
           <input type="text" className="search" placeholder="Search news..." onChange={(event) => filterNewsItems(event.target.value)}/>

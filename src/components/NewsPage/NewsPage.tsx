@@ -15,7 +15,9 @@ const NewsPage = () => {
 
   useFetchNews(); // Custom hook
 
+  // const { status, articles } = useSelector((state: RootState) => state.news);
   const { status, articles } = useSelector((state: RootState) => state.news);
+
   
   useEffect(() => {
     setNewsData(articles.slice(0, 10));
@@ -41,7 +43,7 @@ const NewsPage = () => {
     ]);
   };
 
-  console.log(newsData);
+
 
   return (
     <div className="news-container">
@@ -60,7 +62,8 @@ const NewsPage = () => {
           ) : newsData.length > 0 ? (
             newsData.map((item, index) =>  {
               return(
-                item?.image && <NewsItem key={index} news={item} />
+                // item?.image && <NewsItem key={index} news={item} /> // This condition for newsApi
+                <NewsItem key={index} news={item} sourceType={item?.sourceType} />
               )
             })
           ) : (
