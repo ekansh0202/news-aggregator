@@ -48,14 +48,30 @@
     background-color: #1e40af; /* checked:bg-blue-800 */
   }
   
-  .search{
+  .search-button{
+    margin-top: 40px;
+    border: none;
     height: 30px;
-    border: 1px solid grey;
-    border-radius: 20px;
-    box-sizing: border-box;
-    padding: 10px;
-    width: 200px;
+    width: 100px;
+    border-radius: 50px;
+    background-color: #1d4ed8;
+    color: white;
+    border: 1px solid black;
+    cursor: pointer;
   }
+
+  .reset-button{
+    margin-top: 40px;
+    border: none;
+    height: 30px;
+    width: 100px;
+    border-radius: 50px;
+    background-color: #c4bdbc;
+    color: white;
+    border: 1px solid black;
+    cursor: pointer;
+  }
+
 
   .date-filter {
     display: flex;

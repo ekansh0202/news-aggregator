@@ -36,10 +36,6 @@ const Navbar = () => {
 
       <div className="desktop-menu">
         <Link to="/" style={{ fontSize: '2rem' }}>📑</Link>
-        <h1 className="title">News</h1>
-        {/* <Link to="/posts?sort=trending">Trending</Link>
-        <Link to="/posts?sort=popular">Most Popular</Link>
-        <Link to="/">About</Link> */}
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ interface NewsState {
   guardianArticles: any[]; // filtered - filtered - used to display the data
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
+  sourceType: string | null;
 }
 
 const initialState: NewsState = {
@@ -20,6 +21,7 @@ const initialState: NewsState = {
   guardianArticles:[],
   status: "idle",
   error: null,
+  sourceType: "all",
 };
 
 const newsSlice = createSlice({
@@ -46,10 +48,16 @@ const newsSlice = createSlice({
     },
     setArticles(state, action: PayloadAction<any[]>){
       state.articles = action.payload
-    }
+    },
+    setArticlesWithDate(state, action: PayloadAction<any[]>){
+      state.articles = action.payload
+    },
+    setSourceType(state, action: PayloadAction<string>) {
+      state.sourceType = action.payload
+    },
   },
 });
 
 // export const { fetchNewsStart, fetchNewsFromNewsAPISuccess, fetchNewsFromGuardianAPISuccess, fetchNewsFailure, setArticles } = newsSlice.actions;
-export const { fetchNewsStart, fetchNewsuccess, fetchNewsFailure, fetchNewForSource, setArticles } = newsSlice.actions;
+export const { fetchNewsStart, fetchNewsuccess, fetchNewsFailure, fetchNewForSource, setArticles, setArticlesWithDate, setSourceType } = newsSlice.actions;
 export default newsSlice.reducer;

@@ -1,17 +1,25 @@
-import { useState } from "react";
 import useFetchNews from "../../hooks/useFetchNews";
 import NewsPage from "../NewsPage/NewsPage";
 import "./HomePage.css";
+import { RootState } from "../../redux/store";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const HomePage = () => {
 
-  const { filterNewsItems, getNewsItemsFromSource } = useFetchNews();
-  const [source, setSource] = useState("all");
+  const { getNews, filterNewsItems, getNewsItemsFromSource, setSource } = useFetchNews();
+  const { articles, sourceType, status } = useSelector((state: RootState) => state.news);
 
   const onHandleGetNewsFromSource = (sourceType: string) => {
     setSource(sourceType);
     getNewsItemsFromSource(sourceType);
   }
+
+  const isLoading = status === "loading";
+
+  useEffect(() => {
+    getNews();
+  }, []);
   
   return (
     <div className="home-container">
@@ -25,11 +33,13 @@ const HomePage = () => {
         </div>
 
       <div className="home-options">
-        <button className={`home-button ${source === "all" ? "primary" : ""}`} >All News</button>
-        <button className={`home-button ${source === "newsApi" ? "primary" : ""}`} onClick={() => onHandleGetNewsFromSource('newsApi')}>News Api</button>
-        <button className={`home-button ${source === "guardian" ? "primary" : ""}`} onClick={() => onHandleGetNewsFromSource('guardian')}>Guardian</button>
-        <button className={`home-button ${source === "newsApiOrg" ? "primary" : ""}`} onClick={() => onHandleGetNewsFromSource('newsApiOrg')}>News.org</button>
+        <button className={`home-button ${sourceType === "all" ? "primary" : ""}`} disabled={isLoading} onClick={() => onHandleGetNewsFromSource('all')}>All News</button>
+        <button className={`home-button ${sourceType === "newsApi" ? "primary" : ""}`} disabled={isLoading} onClick={() => onHandleGetNewsFromSource('newsApi')}>News Api</button>
+        <button className={`home-button ${sourceType === "guardian" ? "primary" : ""}`} disabled={isLoading} onClick={() => onHandleGetNewsFromSource('guardian')}>Guardian</button>
+        {/* <button className={`home-button ${sourceType === "guardian" ? "primary" : ""}`} disabled={isLoading} onClick={() => onHandleGetNewsFromSource('nyt')}>New York Times</button> */}
+        <button className={`home-button ${sourceType === "newsApiOrg" ? "primary" : ""}`} disabled={isLoading} onClick={() => onHandleGetNewsFromSource('newsApiOrg')}>News.org</button>
         <span className="separator">|</span>
+        <span className="count">Count: {articles.length}</span>
         <div className="home-search">
           <input type="text" className="search" placeholder="Search news..." onChange={(event) => filterNewsItems(event.target.value)}/>
         </div>

@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from './components/HomePage/HomePage.tsx';
 import { Provider } from "react-redux";
 import { store } from "./redux/store.ts";
+import SingleNewsPage from "./components/SingleNewsPage/SingleNewsPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,11 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage />,
+      },
+      {
+        path: "/news/:id",
+        element: <SingleNewsPage/>,
+        errorElement: <p>Error...</p>
       },
     ],
   },

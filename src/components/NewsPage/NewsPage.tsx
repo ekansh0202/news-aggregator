@@ -15,9 +15,7 @@ const NewsPage = () => {
 
   useFetchNews(); // Custom hook
 
-  // const { status, articles } = useSelector((state: RootState) => state.news);
   const { status, articles } = useSelector((state: RootState) => state.news);
-
   
   useEffect(() => {
     setNewsData(articles.slice(0, 10));
@@ -42,7 +40,7 @@ const NewsPage = () => {
       ...articles.slice(prev.length, prev.length + 10),
     ]);
   };
-
+  
 
 
   return (

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { fetchNewsStart, fetchNewsFromNewsAPISuccess, fetchNewsFailure, setArticles, fetchNewsFromGuardianAPISuccess } from "../redux/newsSlice";
 import {
@@ -7,49 +7,85 @@ import {
   fetchNewsFailure,
   setArticles,
   fetchNewForSource,
+  setArticlesWithDate,
+  setSourceType,
 } from "../redux/newsSlice";
 import {
   fetchNewsFromNewsApi,
   fetchNewsFromGuardianApi,
   fetchNewsFromNewsApiOrg,
+  // fetchNewsFromNewYorkTimesApi,
 } from "../api/newsApi";
 import { AppDispatch, RootState } from "../redux/store";
-// import { data } from "../data";
 
 const useFetchNews = () => {
   const dispatch = useDispatch<AppDispatch>();
   const hasFetched = useRef(false);
   const { allArticles } = useSelector((state: RootState) => state.news);
 
-  useEffect(() => {
-    if (hasFetched.current) return;
-
-    const getNews = async () => {
-      dispatch(fetchNewsStart());
-      try {
-        const newsApiData = await fetchNewsFromNewsApi();
-        const guardianApiData = await fetchNewsFromGuardianApi();
-        const newsApiOrgData = await fetchNewsFromNewsApiOrg();
-        dispatch(
-          fetchNewsuccess([newsApiData, guardianApiData, newsApiOrgData])
-        );
-
-        // NewsAPI call
-        // const data = await fetchNewsFromNewsAPI();
-        // dispatch(fetchNewsFromNewsAPISuccess(data));
-
-        // GuardianAPI call
-        // const data = await fetchNewsFromGuardianAPI();
-        // dispatch(fetchNewsFromGuardianAPISuccess(data));
-
-        hasFetched.current = true;
-      } catch (error) {
-        dispatch(fetchNewsFailure("Failed to fetch news"));
+  // Get news from all endpoints
+  const getNews = async () => {
+    dispatch(fetchNewsStart());
+    try {
+      const results = await Promise.allSettled([
+        fetchNewsFromNewsApi(),
+        fetchNewsFromGuardianApi(),
+        // fetchNewsFromNewYorkTimesApi(),
+        fetchNewsFromNewsApiOrg(),
+      ]);
+  
+      const successfulResults = results.filter(result => result.status === 'fulfilled');
+      const failedResults = results.filter(result => result.status === 'rejected');
+  
+      const allNewsData = successfulResults.map(result => result.value);
+  
+      if (allNewsData.length > 0) {
+        dispatch(fetchNewsuccess(allNewsData));
       }
-    };
-
-    getNews();
-  }, [dispatch]);
+  
+      if (failedResults.length > 0) {
+        dispatch(fetchNewsFailure("Some news APIs failed"));
+      }
+  
+      hasFetched.current = true;
+    } catch (error) {
+      dispatch(fetchNewsFailure("Failed to fetch news"));
+    }
+  };
+  
+  //  Get news from a specific source
+  const getNewsItemsFromSource = async (sourceType: string, categories: string[] = [], sources: string[] = []) => {
+    dispatch(fetchNewsStart());
+    try{
+      let newsData: any = [];
+      switch(sourceType){
+        case 'all':
+          getNews();
+          break;
+        case 'newsApi':
+          newsData = await fetchNewsFromNewsApi(categories, sources);
+          dispatch(fetchNewForSource(newsData));
+          break;
+        case 'guardian':
+          newsData = await fetchNewsFromGuardianApi(categories);
+          dispatch(fetchNewForSource(newsData));
+          break;
+        // case 'nyt':
+        //   newsData = await fetchNewsFromNewYorkTimesApi(categories, sources);
+        //   dispatch(fetchNewForSource(newsData));
+        //   break;
+        case 'newsApiOrg':
+          newsData = await fetchNewsFromNewsApiOrg(sources);
+          dispatch(fetchNewForSource(newsData));
+          break;
+        default:
+          newsData = []
+      }
+    }
+    catch (error) {
+      dispatch(fetchNewsFailure("Failed to fetch news"));
+    }
+  }
 
   const filterNewsItems = (searchTerm: string) => {
     if (!searchTerm) {
@@ -64,32 +100,38 @@ const useFetchNews = () => {
     dispatch(setArticles(filteredArticles));
   };
 
-  const getNewsItemsFromSource = async (sourceType: string) => {
-    dispatch(fetchNewsStart());
-    try{
-      let newsData: any = [];
-      switch(sourceType){
-        case 'newsApi':
-          newsData = await fetchNewsFromNewsApi();
-          break;
-        case 'guardian':
-          newsData = await fetchNewsFromGuardianApi();
-          break;
-        case 'newsApiOrg':
-          newsData = await fetchNewsFromNewsApiOrg();
-          break;
-        default:
-          newsData = []
-      }
-      dispatch(fetchNewForSource(newsData));
+  const filterNewsWithDate = (date: string) => {
+    if(date !== ""){
+      const filteredItems = allArticles.filter((item) => {
+        // Create a Date object for the item
+        const itemDate = new Date(item?.publishedAt || item?.webPublicationDate || item?.dateTime);
+        
+        // Extract the date part (YYYY-MM-DD) from both the input and the item's date
+        const itemDateString = itemDate.toISOString().slice(0, 10); // "2025-02-26"
+        
+        // Compare the dates
+        return itemDateString === date;
+      });
+    
+      dispatch(setArticlesWithDate(filteredItems))
     }
-    catch (error) {
-      dispatch(fetchNewsFailure("Failed to fetch news"));
+    else{
+      dispatch(setArticlesWithDate(allArticles
+        
+      ))
     }
   }
+
+  const setSource = (source: string) => {
+    dispatch(setSourceType(source));
+  }
+  // useEffect(() => {
+  //   if (hasFetched.current) return;
+  //   getNews();
+  // }, [dispatch]);
   
 
-  return { filterNewsItems, getNewsItemsFromSource };
+  return { getNews, filterNewsItems, getNewsItemsFromSource, filterNewsWithDate, setSource };
 };
 
 export default useFetchNews;
