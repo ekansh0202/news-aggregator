@@ -74,12 +74,12 @@ const NewsItem = ({ news, sourceType }: NewsItemProps) => {
             newsData?.author &&
             <div className="news-meta">
             <span>Written by</span>
-            <Link to={`/newss?author=${newsData?.author}`}>{newsData?.author}</Link>
+            <Link to={newsData?.author} className="news-link">{newsData?.author}</Link>
             <span>on</span>
             <span>{format(new Date(newsData.date), "MMMM d, yyyy")}</span>
             </div>
           }
-        <div className="news-desc">{newsData?.description?.slice(0, 200)}</div>
+        <div className="news-desc">{newsData?.description?.slice(0, 200).split(" ").join(" ")}</div>
         <Link to={newsData.readMore} className="news-read-more">
           Read More
         </Link>

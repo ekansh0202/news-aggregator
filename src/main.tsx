@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import MainLayout from "./components/MainLayout/MainLayout.tsx";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import HomePage from './components/HomePage/HomePage.tsx';
 import { Provider } from "react-redux";
 import { store } from "./redux/store.ts";
@@ -22,6 +22,10 @@ const router = createBrowserRouter([
         element: <SingleNewsPage/>,
         errorElement: <p>Error...</p>
       },
+      {
+        path: "*",
+        element: <Navigate to="/" />,
+      }
     ],
   },
 ]);

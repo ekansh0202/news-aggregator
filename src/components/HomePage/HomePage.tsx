@@ -19,6 +19,7 @@ const HomePage = () => {
 
   useEffect(() => {
     getNews();
+    setSource("all");
   }, []);
   
   return (

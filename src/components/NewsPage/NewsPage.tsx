@@ -31,6 +31,7 @@ const NewsPage = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [articles]); 
+  
 
   const loadMore = () => {
     if (newsData.length >= articles.length) return;
