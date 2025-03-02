@@ -110,6 +110,7 @@ export const fetchNewsFromGuardianApi = async (categories: string[] = []) => {
 
 // Fetch news from newsApi.org
 // This api doesn't support sources parameter mixed with country or category
+// Also this api will only work for localhost. Browsers(after deployment) - will not work as not supported in developer's plan
 export const fetchNewsFromNewsApiOrg = async (sources: string[] = []) => {
   try {
     const response = await axios.get("https://newsapi.org/v2/top-headlines", {
