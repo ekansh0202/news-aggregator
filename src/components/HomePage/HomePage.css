@@ -1,14 +1,14 @@
 .home-container {
-    margin-top: 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    box-sizing: border-box;
-    padding-left: 30px;
-    padding-right: 30px;
-  }
-  
-  /* Links Section */
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+/* Links Section */
 .home-options {
   margin-top: 20px;
   display: flex;
@@ -33,12 +33,12 @@
 }
 
 .home-button:hover {
-  background-color: #e0e7ff; 
+  background-color: #e0e7ff;
 }
 
 /* Primary Button */
 .home-button.primary {
-  background-color: #1e40af; 
+  background-color: #1e40af;
   color: white;
 }
 
@@ -52,7 +52,7 @@
   font-weight: 500;
 }
 
-.search{
+.search {
   height: 30px;
   border: 1px solid grey;
   border-radius: 20px;
@@ -67,17 +67,17 @@
 }
 
 .text {
-  color: #2d3748; 
-  font-size: 3rem; 
+  color: #2d3748;
+  font-size: 3rem;
   font-weight: bold;
   width: 800px;
   margin-bottom: 20px;
 }
 
-.subtitle{
+.subtitle {
   font-size: 1rem;
 }
-  
+
 /* Mobile Responsive Styles */
 
 @media (max-width: 1000px) {

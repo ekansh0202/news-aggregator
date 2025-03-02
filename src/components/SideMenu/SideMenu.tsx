@@ -50,7 +50,6 @@ const SideMenu = () => {
     filterNewsWithDate("");
   };
 
-
   const handleSearch = () => {
     if (sourceType) {
       getNewsItemsFromSource(sourceType, selectedCategories, selectedSources);
@@ -63,7 +62,7 @@ const SideMenu = () => {
     setSelectedDate("");
     filterNewsWithDate("");
     getNews();
-  }
+  };
 
   useEffect(() => {
     setSelectedCategories([]);
@@ -72,50 +71,6 @@ const SideMenu = () => {
 
   return (
     <div className="sidebar">
-      {/* <h1 className="section-title">Filter</h1>
-      <div className="filter-options">
-        <label className="filter-label">
-          <input
-            type="checkbox"
-            name="sort"
-            // onChange={handleFilterChange}
-            value="newest"
-            className="filter-input"
-          />
-          Newest
-        </label>
-        <label className="filter-label">
-          <input
-            type="checkbox"
-            name="sort"
-            // onChange={handleFilterChange}
-            value="popular"
-            className="filter-input"
-          />
-          Most Popular
-        </label>
-        <label className="filter-label">
-          <input
-            type="checkbox"
-            name="sort"
-            // onChange={handleFilterChange}
-            value="trending"
-            className="filter-input"
-          />
-          Trending
-        </label>
-        <label className="filter-label">
-          <input
-            type="checkbox"
-            name="sort"
-            // onChange={handleFilterChange}
-            value="oldest"
-            className="filter-input"
-          />
-          Source
-        </label>
-      </div> */}
-
       <h1 className="section-title">Category</h1>
       <div className="filter-options">
         {filters.categories.map((item) => {
@@ -144,8 +99,8 @@ const SideMenu = () => {
           type="date"
           className="date-input"
           onChange={(event) => {
-            setSelectedDate(event.target.value)
-            filterNewsWithDate(event.target.value)
+            setSelectedDate(event.target.value);
+            filterNewsWithDate(event.target.value);
           }}
           value={selectedDate}
           disabled={isLoading}
@@ -175,32 +130,15 @@ const SideMenu = () => {
           </div>
         </div>
       ) : null}
-
-      {/* <h1 className="section-title">Locations</h1>
-      <div className="filter-options">
-      <label className="filter-label">
-      <select>
-        {
-          filters.languages.map((item) => {
-            return(
-                <option className="filter-input">{item}</option>
-            )
-          })
-        }
-        </select>
-        </label>
-      </div> */}
-
       <div className="buttons">
-      <button className="search-button" onClick={handleSearch}>
-        Search
-      </button>
+        <button className="search-button" onClick={handleSearch}>
+          Search
+        </button>
 
-      <button className="reset-button" onClick={handleReset}>
-        Reset
-      </button>
+        <button className="reset-button" onClick={handleReset}>
+          Reset
+        </button>
       </div>
-
     </div>
   );
 };

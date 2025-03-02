@@ -41,8 +41,6 @@ const NewsPage = () => {
       ...articles.slice(prev.length, prev.length + 10),
     ]);
   };
-  
-
 
   return (
     <div className="news-container">
@@ -54,7 +52,7 @@ const NewsPage = () => {
         {open ? "Close" : "Filter or Search"}
       </button>
 
-      <div className="content-wrapper">
+      {<div className="content-wrapper">
         <div className="news-list">
           {status === "loading" ? (
             <p className="loading-text">Loading news...</p>
@@ -72,7 +70,7 @@ const NewsPage = () => {
         <div className={`side-menu ${open ? "show" : ""}`}>
           <SideMenu />
         </div>
-      </div>
+      </div> }
     </div>
   );
 };

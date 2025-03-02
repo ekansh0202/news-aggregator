@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { fetchNewsStart, fetchNewsFromNewsAPISuccess, fetchNewsFailure, setArticles, fetchNewsFromGuardianAPISuccess } from "../redux/newsSlice";
 import {
   fetchNewsStart,
   fetchNewsuccess,
@@ -87,6 +86,7 @@ const useFetchNews = () => {
     }
   }
 
+  // Filter items using search field
   const filterNewsItems = (searchTerm: string) => {
     if (!searchTerm) {
       dispatch(setArticles(allArticles));
@@ -124,12 +124,7 @@ const useFetchNews = () => {
 
   const setSource = (source: string) => {
     dispatch(setSourceType(source));
-  }
-  // useEffect(() => {
-  //   if (hasFetched.current) return;
-  //   getNews();
-  // }, [dispatch]);
-  
+  }  
 
   return { getNews, filterNewsItems, getNewsItemsFromSource, filterNewsWithDate, setSource };
 };

@@ -41,7 +41,7 @@
 
   .news-link {
     width: 200px;
-    white-space: normal; /* Allow text to wrap onto the next line */
+    white-space: normal;
     overflow: hidden;
     text-overflow: ellipsis;
   }

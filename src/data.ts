@@ -1,3 +1,5 @@
+// Static data added for testing to avoid extra api calls
+
 export const data = [
     {
         "uri": "8533710688",

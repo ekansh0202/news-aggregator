@@ -1,14 +1,14 @@
 .news-container {
     box-sizing: border-box;
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 5%; 
+    padding-right: 5%; 
     width: 100%;
     margin-top: 50px;
   }
   
   .news-title {
     margin-bottom: 2rem;
-    font-size: 1.5rem; /* text-2xl */
+    font-size: 1.5rem;
   }
 
   
@@ -16,14 +16,16 @@
     display: flex;
     flex-direction: column-reverse;
     justify-content: space-between;
+    width: 100%;
   }
   
   .news-list {
-    width: 60vw;
+    width: 100%;
+    max-width: 100%;
   }
   
   .side-menu {
-    display: none;
+    display: block;
   }
   
   .show {
@@ -31,12 +33,12 @@
   }
 
   .filter-button {
-    background-color: #1e40af; /* bg-blue-800 */
+    background-color: #1e40af;
     color: white;
-    font-size: 0.875rem; /* text-sm */
-    padding: 0.5rem 1rem; /* px-4 py-2 */
-    border-radius: 1rem; /* rounded-2xl */
-    margin-bottom: 1rem; /* mb-4 */
+    font-size: 0.875rem; 
+    padding: 0.5rem 1rem; 
+    border-radius: 1rem; 
+    margin-bottom: 1rem; 
     border: none;
     cursor: pointer;
     display: block;
@@ -44,6 +46,16 @@
   
   
   @media (min-width: 768px) {
+
+    .news-container {
+      padding-left: 10px;  
+      padding-right: 10px;
+    }
+
+    .news-list {
+      width: 100%; 
+    }
+    
     .toggle-button {
       display: none; 
     }

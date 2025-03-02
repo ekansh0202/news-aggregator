@@ -99,29 +99,3 @@
     background-color: darkblue;
   }
   
-  /* Hide Mobile Links by default */
-  .hide {
-    right: -100%;
-    opacity: 0;
-    visibility: hidden;
-  }
-  
-  .show {
-    right: 0;
-    opacity: 1;
-    visibility: visible;
-  }
-  
-  /* Responsive Design */
-  @media screen and (min-width: 768px) {
-    .desktop-menu {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-  
-    .mobile-menu {
-      display: none;
-    }
-  }
-  

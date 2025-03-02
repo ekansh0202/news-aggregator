@@ -94,3 +94,10 @@
   .date-input:focus {
     border-color: #2563eb; /* Slightly brighter blue */
   }
+
+  @media (max-width: 768px) {
+    .search-button{
+      margin-right: 30px;
+    }
+  }
+  
