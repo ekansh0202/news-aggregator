@@ -1,7 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { format } from "timeago.js";
-import newsLogo from '../../assets/news-logo.webp';
+import newsLogo from "../../assets/news-logo.webp";
 import "./NewsItem.css";
+import { useState } from "react";
 
 interface NewsItemProps {
   news: any;
@@ -9,6 +10,7 @@ interface NewsItemProps {
 }
 
 const NewsItem = ({ news, sourceType }: NewsItemProps) => {
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   const getNewsData = () => {
     switch (sourceType) {
@@ -25,7 +27,9 @@ const NewsItem = ({ news, sourceType }: NewsItemProps) => {
 
       case "guardian":
         return {
-          image: news?.elements?.[0]?.assets?.[0]?.file ? news?.elements?.[0]?.assets?.[0]?.file : newsLogo,
+          image: news?.elements?.[0]?.assets?.[0]?.file
+            ? news?.elements?.[0]?.assets?.[0]?.file
+            : newsLogo,
           title: news?.webTitle?.replace(/[^\w\s]/gi, "").slice(0, 50),
           author: news?.webUrl,
           date: news?.webPublicationDate,
@@ -53,15 +57,34 @@ const NewsItem = ({ news, sourceType }: NewsItemProps) => {
   const newsData = getNewsData();
   const navigate = useNavigate();
 
+  const handleImageLoad = () => {
+    setIsImageLoaded(true);
+  };
 
   if (!newsData) return null;
 
   return (
-    <div className="news-container" onClick={() => navigate(`/news/${news?.id}`, { state: { newsData } })}>
+    <div
+      className="news-container"
+      onClick={() => navigate(`/news/${news?.id}`, { state: { newsData } })}
+    >
       {/* Image */}
       {newsData.image && (
         <div className="news-image">
-          <img src={newsData.image} width="735" height="300" alt="Article" loading="lazy" />
+          {!isImageLoaded && (
+            <div className="image-loading-placeholder">
+              <span>Loading...</span>
+            </div>
+          )}
+
+          <img
+            src={newsData.image}
+            width="735"
+            height="300"
+            alt="Article"
+            loading="lazy"
+            onLoad={handleImageLoad}
+          />
         </div>
       )}
 
@@ -70,16 +93,19 @@ const NewsItem = ({ news, sourceType }: NewsItemProps) => {
         <Link to={newsData.url} className="news-title">
           {newsData.title}
         </Link>
-          {
-            newsData?.author &&
-            <div className="news-meta">
+        {newsData?.author && (
+          <div className="news-meta">
             <span>Written by</span>
-            <Link to={newsData?.author} className="news-link">{newsData?.author}</Link>
+            <Link to={newsData?.author} className="news-link">
+              {newsData?.author}
+            </Link>
             <span>on</span>
             <span>{format(new Date(newsData.date), "MMMM d, yyyy")}</span>
-            </div>
-          }
-        <div className="news-desc">{newsData?.description?.slice(0, 200).split(" ").join(" ")}</div>
+          </div>
+        )}
+        <div className="news-desc">
+          {newsData?.description?.slice(0, 200).split(" ").join(" ")}
+        </div>
         <Link to={newsData.readMore} className="news-read-more">
           Read More
         </Link>

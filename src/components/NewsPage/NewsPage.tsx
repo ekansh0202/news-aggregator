@@ -44,7 +44,6 @@ const NewsPage = () => {
 
   return (
     <div className="news-container">
-      <h1 className="news-title"></h1>
       <button
         onClick={() => setOpen((prev) => !prev)}
         className="filter-button"

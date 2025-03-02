@@ -29,6 +29,8 @@
     font-weight: 600;
     text-decoration: none;
     color: inherit;
+    word-wrap: break-word;
+    max-width: 600px;
   }
   
   .news-meta {

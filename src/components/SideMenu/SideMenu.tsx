@@ -4,6 +4,7 @@ import { RootState } from "../../redux/store";
 import { filters } from "../../utils/filters";
 import "./SideMenu.css";
 import { useSelector } from "react-redux";
+import { setSourceType } from "../../redux/newsSlice";
 
 const SideMenu = () => {
   const { filterNewsWithDate } = useFetchNews();
@@ -11,7 +12,7 @@ const SideMenu = () => {
   const [selectedSources, setSelectedSources] = useState<any[]>([]);
   const [selectedDate, setSelectedDate] = useState<string>("");
 
-  const { getNews, getNewsItemsFromSource } = useFetchNews();
+  const { getNewsItemsFromSource } = useFetchNews();
   const { sourceType, status } = useSelector((state: RootState) => state.news);
 
   const isLoading = status === "loading";
@@ -61,7 +62,12 @@ const SideMenu = () => {
     setSelectedSources([]);
     setSelectedDate("");
     filterNewsWithDate("");
-    getNews();
+    if(sourceType){
+      getNewsItemsFromSource(sourceType, [], []);
+    }
+    else{
+      setSourceType("all");
+    }
   };
 
   useEffect(() => {

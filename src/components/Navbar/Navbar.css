@@ -14,7 +14,7 @@
   
   /* Desktop Menu */
   .desktop-menu {
-    display: none;
+    display: block;
   }
   
   .desktop-menu a {
