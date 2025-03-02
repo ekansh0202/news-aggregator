@@ -17,6 +17,7 @@ import {
 } from "../api/newsApi";
 import { AppDispatch, RootState } from "../redux/store";
 
+// Custom hook created for all the logic. Any function from this hook will do all the logic i.e. calling reducers and updating the state
 const useFetchNews = () => {
   const dispatch = useDispatch<AppDispatch>();
   const hasFetched = useRef(false);

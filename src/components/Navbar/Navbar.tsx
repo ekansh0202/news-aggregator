@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
+// Navbar of the application
 const Navbar = () => {
 
   return (

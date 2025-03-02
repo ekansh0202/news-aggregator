@@ -6,6 +6,7 @@ import "./SideMenu.css";
 import { useSelector } from "react-redux";
 import { setSourceType } from "../../redux/newsSlice";
 
+// SideMenu 
 const SideMenu = () => {
   const { filterNewsWithDate } = useFetchNews();
   const [selectedCategories, setSelectedCategories] = useState<any[]>([]);

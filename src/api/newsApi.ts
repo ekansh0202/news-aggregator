@@ -1,6 +1,8 @@
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 
+
+// API Keys
 const API_KEYS = {
   newsApi: import.meta.env.VITE_NEWS_API,
   guardian: import.meta.env.VITE_GUARDIAN,
@@ -8,6 +10,7 @@ const API_KEYS = {
   newsApiOrg: import.meta.env.VITE_NEWS_API_ORG,
 };
 
+// All api calls are added here
 
 
 // Fetch news from newsApi

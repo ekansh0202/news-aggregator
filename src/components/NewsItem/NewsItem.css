@@ -7,8 +7,13 @@
   }
   
   .news-desc {
-    max-width: 500px;
-    word-wrap: break-word;
+    max-width: 500px;                    
+    display: -webkit-box;               
+    -webkit-box-orient: vertical;        
+    overflow: hidden;                    
+    -webkit-line-clamp: 3; 
+    line-clamp: 3;              
+    text-overflow: ellipsis;            
   }
   
   .news-image img {
@@ -46,6 +51,18 @@
     white-space: normal;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  .news-view{
+    margin-top: 40px;
+    border: none;
+    height: 30px;
+    width: 100px;
+    border-radius: 50px;
+    background-color: #1d4ed8;
+    color: white;
+    border: 1px solid black;
+    cursor: pointer;
   }
   
   .news-meta a {

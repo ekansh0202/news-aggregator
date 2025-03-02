@@ -2,6 +2,7 @@ import { format } from "timeago.js";
 import "./SingleNewsPage.css";
 import { useLocation } from "react-router-dom";
 
+// SingleNewsPage
 const SingleNewsPage = () => {
 
     const location = useLocation();
@@ -17,7 +18,7 @@ const SingleNewsPage = () => {
             newsData?.author &&
             <div className="meta">
             <span>Written by</span>
-            <a href={newsData?.url?.startsWith("/") ? newsData?.url.substring(1) : newsData?.url} className="username">
+            <a href={newsData?.url?.startsWith("/") ? newsData?.url.substring(1) : newsData?.url} className="username" target="_blank">
               {newsData?.author}
             </a>
             <span>on</span>

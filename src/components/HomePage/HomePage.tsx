@@ -5,6 +5,7 @@ import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
+// HomePage of the application - Contains the buttons for different news sources and the NewsPage containing all the articles
 const HomePage = () => {
 
   const { getNews, filterNewsItems, getNewsItemsFromSource, setSource } = useFetchNews();
@@ -15,8 +16,10 @@ const HomePage = () => {
     getNewsItemsFromSource(sourceType);
   }
 
+  // To prevent multiple options to be enabled to get articles
   const isLoading = status === "loading";
 
+  // Fetching all the articles at the start
   useEffect(() => {
     getNews();
     setSource("all");

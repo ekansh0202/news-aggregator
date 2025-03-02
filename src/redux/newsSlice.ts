@@ -3,10 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface NewsState {
   allArticles: any[]; // all the articles combined - original
   articles: any[]; // all the articles combined - filtered - used to display the data
-  allNewsArticles: any[]; // original
-  newsArticles: any[]; // filtered - filtered - used to display the data
-  allGuardianArticles: any[]; // original
-  guardianArticles: any[]; // filtered - filtered - used to display the data
+
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
   sourceType: string | null;
@@ -15,10 +12,7 @@ interface NewsState {
 const initialState: NewsState = {
   allArticles: [],
   articles: [],
-  allNewsArticles:[],
-  newsArticles:[],
-  allGuardianArticles:[],
-  guardianArticles:[],
+
   status: "idle",
   error: null,
   sourceType: "all",
@@ -33,9 +27,9 @@ const newsSlice = createSlice({
     },
     fetchNewsuccess(state, action: PayloadAction<any[]>) {
       state.status = "succeeded";
-      const flattenedArticles = action.payload.flat(); 
-      state.allArticles = flattenedArticles
-      state.articles = flattenedArticles
+      const flattenedArticles = action.payload.flat();
+      state.allArticles = flattenedArticles;
+      state.articles = flattenedArticles;
     },
     fetchNewsFailure(state, action: PayloadAction<string>) {
       state.status = "failed";
@@ -43,21 +37,29 @@ const newsSlice = createSlice({
     },
     fetchNewForSource(state, action: PayloadAction<any[]>) {
       state.status = "succeeded";
-      state.allArticles = action.payload
-      state.articles = action.payload
+      state.allArticles = action.payload;
+      state.articles = action.payload;
     },
-    setArticles(state, action: PayloadAction<any[]>){
-      state.articles = action.payload
+    setArticles(state, action: PayloadAction<any[]>) {
+      state.articles = action.payload;
     },
-    setArticlesWithDate(state, action: PayloadAction<any[]>){
-      state.articles = action.payload
+    setArticlesWithDate(state, action: PayloadAction<any[]>) {
+      state.articles = action.payload;
     },
     setSourceType(state, action: PayloadAction<string>) {
-      state.sourceType = action.payload
+      state.sourceType = action.payload;
     },
   },
 });
 
 // export const { fetchNewsStart, fetchNewsFromNewsAPISuccess, fetchNewsFromGuardianAPISuccess, fetchNewsFailure, setArticles } = newsSlice.actions;
-export const { fetchNewsStart, fetchNewsuccess, fetchNewsFailure, fetchNewForSource, setArticles, setArticlesWithDate, setSourceType } = newsSlice.actions;
+export const {
+  fetchNewsStart,
+  fetchNewsuccess,
+  fetchNewsFailure,
+  fetchNewForSource,
+  setArticles,
+  setArticlesWithDate,
+  setSourceType,
+} = newsSlice.actions;
 export default newsSlice.reducer;

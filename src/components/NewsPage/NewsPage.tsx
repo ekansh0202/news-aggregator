@@ -9,18 +9,22 @@ import useFetchNews from "../../hooks/useFetchNews";
 
 import "./NewsPage.css";
 
+// NewsPage
 const NewsPage = () => {
   const [open, setOpen] = useState(false);
   const [newsData, setNewsData] = useState<any[]>([]);
 
   useFetchNews(); // Custom hook
 
+  // Global state
   const { status, articles } = useSelector((state: RootState) => state.news);
   
+  // Loading 10 articles at a time
   useEffect(() => {
     setNewsData(articles.slice(0, 10));
   }, [articles]);
 
+  // Infinite scrolling
   useEffect(() => {
     const handleScroll = () => {
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 50) {

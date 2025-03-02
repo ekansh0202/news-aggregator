@@ -9,9 +9,11 @@ interface NewsItemProps {
   sourceType: "newsApi" | "guardian" | "newsApiOrg";
 }
 
+// NewsItem to display single news item in the list
 const NewsItem = ({ news, sourceType }: NewsItemProps) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
+  // Global function to prepare data to display as all the apis provide different keys from json
   const getNewsData = () => {
     switch (sourceType) {
       case "newsApi":
@@ -57,6 +59,7 @@ const NewsItem = ({ news, sourceType }: NewsItemProps) => {
   const newsData = getNewsData();
   const navigate = useNavigate();
 
+  // If image not loaded then show placeholder
   const handleImageLoad = () => {
     setIsImageLoaded(true);
   };
@@ -66,7 +69,6 @@ const NewsItem = ({ news, sourceType }: NewsItemProps) => {
   return (
     <div
       className="news-container"
-      onClick={() => navigate(`/news/${news?.id}`, { state: { newsData } })}
     >
       {/* Image */}
       {newsData.image && (
@@ -96,19 +98,20 @@ const NewsItem = ({ news, sourceType }: NewsItemProps) => {
         {newsData?.author && (
           <div className="news-meta">
             <span>Written by</span>
-            <Link to={newsData?.author} className="news-link">
+            <a href={newsData?.url?.startsWith("/") ? newsData?.url.substring(1) : newsData?.url} className="news-link" target="_blank">
               {newsData?.author}
-            </Link>
+            </a>
             <span>on</span>
             <span>{format(new Date(newsData.date), "MMMM d, yyyy")}</span>
           </div>
         )}
         <div className="news-desc">
-          {newsData?.description?.slice(0, 200).split(" ").join(" ")}
+          {newsData?.description?.slice(0, 200)}
         </div>
-        <Link to={newsData.readMore} className="news-read-more">
+        <a href={newsData?.url?.startsWith("/") ? newsData?.url.substring(1) : newsData?.url}className="news-read-more" target="_blank">
           Read More
-        </Link>
+        </a>
+        <button className="news-view" onClick={() => navigate(`/news/${news?.id}`, { state: { newsData } })}>View</button>
       </div>
     </div>
   );
